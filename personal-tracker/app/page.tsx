@@ -35,7 +35,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-1 ml-[1%] min-h-0 gap-4">
+      <div className="flex flex-1 ml-[1%] min-h-0 gap-4 text-[#000000]">
 
         <div className="flex flex-col w-[62%] h-full gap-10">
 
