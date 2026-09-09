@@ -20,7 +20,7 @@ export default function Home() {
             Create Entry
           </a>
           <div className="flex gap-5 items-center">
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180" />
+            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 text-[#000000]" />
             <div>
               1/2
             </div>
@@ -35,13 +35,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-1 ml-[1%] min-h-0 gap-4 text-[#000000]">
+      <div className="flex flex-1 ml-[1%] min-h-0 gap-4">
 
         <div className="flex flex-col w-[62%] h-full gap-10">
 
           <main className="flex flex-col h-full">
 
-            <div className="flex flex-col items-center gap-6 text-center text-8xl">
+            <div className="flex flex-col items-center gap-6 text-center text-8xl text-[#000000]">
               March 5th
             </div>
 
