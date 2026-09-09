@@ -21,7 +21,7 @@ export default function Home() {
           </a>
           <div className="flex gap-5 items-center">
             <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180" />
-            <div className="text-[#000000]">
+            <div className="flex text-[#000000]">
               1/2
             </div>
             <Image src="/Arrow.png" alt="Arrow" width={32} height={32} />
