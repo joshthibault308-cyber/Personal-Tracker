@@ -12,23 +12,28 @@ export default function Home() {
       />
 
       <div className="bg-[#FFEFD4]">
-        <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-16 gap-14 text-[15px] items-center justify-between font-medium`}>
+        <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
           <a
-            className="flex h-11 items-center justify-center gap-2 rounded-full bg-[#F8CF89] px-2 text-[#000000] transition-colors hover:bg-[#fad79b] md:w-[158px]"
+            className="flex whitespace-nowrap h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
             href="/create"
           >
             Create Entry
           </a>
+<<<<<<< HEAD
           <div className="flex gap-5 items-center">
             <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180" />
+=======
+          <div className="flex gap-[10%] items-center">
+            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
+>>>>>>> 766fc32 (Fixed text color)
             <div className="flex text-[#000000]">
               1/2
             </div>
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} />
+            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full"/>
           </div>
           <a
-            className="flex h-11 items-center justify-center gap-2 rounded-full bg-[#F8CF89] px-2 text-[#000000] transition-colors hover:bg-[#fad79b] md:w-[158px]"
-            href="/"
+            className="flex whitespace-nowrap h-11 items-center justify-center gap-[2%] rounded-full bg-[#F8CF89] px-2 text-[#000000] transition-colors hover:bg-[#fad79b]"
+            href="/login"
           >
             Logout
           </a>
@@ -41,7 +46,7 @@ export default function Home() {
 
           <main className="flex flex-col h-full">
 
-            <div className="flex flex-col items-center gap-6 text-center text-8xl text-[#000000]">
+            <div className="flex flex-col text-center text-[5vw] text-[#000000]">
               March 5th
             </div>
 
