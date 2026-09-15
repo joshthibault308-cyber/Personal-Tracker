@@ -19,13 +19,8 @@ export default function Home() {
           >
             Create Entry
           </a>
-<<<<<<< HEAD
           <div className="flex gap-5 items-center">
             <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180" />
-=======
-          <div className="flex gap-[10%] items-center">
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
->>>>>>> 766fc32 (Fixed text color)
             <div className="flex text-[#000000]">
               1/2
             </div>
