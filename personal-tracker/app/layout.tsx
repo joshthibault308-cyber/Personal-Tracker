@@ -16,7 +16,7 @@ export const jetBrains_Mono = JetBrains_Mono({ subsets: ['latin']});
 
 export const aBeeZee = ABeeZee({ subsets: ['latin'], weight: ['400'],});
 
-export const zilla_Slab = Zilla_Slab({ subsets: ['latin'], weight: ['400'],});
+export const zilla_Slab = Zilla_Slab({ subsets: ['latin'], weight: ['600'],});
 
 export const metadata: Metadata = {
   title: "Create Next App",
