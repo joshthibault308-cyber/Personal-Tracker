@@ -5,13 +5,13 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, Text7 
   return (
     <div className={`${jetBrains_Mono.className} grid grid-flow-col auto-cols-fr gap-4 [container-type:inline-size]`}>
 
-      <EntryBlock Text={Text1}/>
-      <EntryBlock Text={Text2}/>
-      <EntryBlock Text={Text3}/>
-      <EntryBlock Text={Text4}/>
-      <EntryBlock Text={Text5}/>
-      <EntryBlock Text={Text6}/>
-      <EntryBlock Text={Text7}/>
+      <EntryBlock Text={Text1} />
+      <EntryBlock Text={Text2} />
+      <EntryBlock Text={Text3} />
+      <EntryBlock Text={Text4} />
+      <EntryBlock Text={Text5} />
+      <EntryBlock Text={Text6} />
+      <EntryBlock Text={Text7} />
 
       <div className="grid gap-[10%]">
         <a className="w-1/2 aspect-square rounded-full bg-[#FFDF9B]"

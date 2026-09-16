@@ -1,10 +1,43 @@
+'use client'
+
 import Image from "next/image";
 import Entry from "./NewEntries";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
+import Form from "next/form";
+import Link from "next/link";
+import {useState} from "react";
+import { redirect } from "next/navigation";
+
+export async function createEntry(formData: FormData) {
+
+    const date = formData.get('date')?.toString() || ' '
+    const time = formData.get('time')?.toString() || ' '
+    const duration = formData.get('duration')
+    const type = formData.get('type')
+    const intensity = formData.get('intensity')
+    const soreness = formData.get('soreness')
+    const notes = formData.get('notes')
+
+    //handleCreateEntry(formData, setStatus);
+    //setStatus(prevEntries => [...prevEntries, `Date: ${date}, Time: ${time}, Duration: ${duration}, Type: ${type}, Intensity: ${intensity}, Soreness: ${soreness}, Notes: ${notes}`]);
+
+    console.log('Submitted date:', date)
+    console.log('Submitted time:', time)
+
+    redirect('/?{date}');
+
+    return {
+      date, time, duration, type, intensity, soreness, notes
+    }
+
+  }
 
 export default function Home() {
-  return (
 
+  const [entries, setEntries] = useState<string[]>([]);
+  const formData = new FormData();
+
+  return (
     <div className="flex h-screen flex-col min-h-0">
 
       <Image
@@ -12,9 +45,9 @@ export default function Home() {
       />
 
       <div className="bg-[#FFEFD4]">
-        <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
+        <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
           <a
-            className="flex whitespace-nowrap h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
+            className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
             href="/create"
           >
             Create Entry
@@ -24,10 +57,10 @@ export default function Home() {
             <div className="flex text-[#000000]">
               1/2
             </div>
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full"/>
+            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
           </div>
           <a
-            className="flex whitespace-nowrap h-11 items-center justify-center gap-[2%] rounded-full bg-[#F8CF89] px-2 text-[#000000] transition-colors hover:bg-[#fad79b]"
+            className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center gap-[2%] rounded-full bg-[#F8CF89] px-2 text-[#000000] transition-colors hover:bg-[#fad79b]"
             href="/login"
           >
             Logout
@@ -88,7 +121,9 @@ export default function Home() {
 
               <div className="grid gap-5 overflow-y-auto">
 
-                <Entry Text1="8:30PM" Text2="9:30PM" Text3="60 minutes" Text4="Rock Climbing" Text5="Medium" Text6="5/10" Text7="N/A" />
+                {entries.map((entry, index) => (
+                  <Entry Text1={entry} Text2={"hi"} Text3={"hi2"} Text4={"hi5"} Text5={"hi6"} Text6={"hi7"} Text7={"hi8"} />
+                ))}
 
 
 
