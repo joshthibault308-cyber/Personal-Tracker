@@ -121,7 +121,7 @@ export default function Home() {
                   <Entry Text1={entry} Text2={"hi"} Text3={"hi2"} Text4={"hi5"} Text5={"hi6"} Text6={"hi7"} Text7={"hi8"} />
                 ))}
 
-
+                <Entry Text1="3pm" Text2="3:30pm" Text3="30 minutes" Text4="Running" Text5="High" Text6="Low" Text7="N/A"/>
 
 
 
