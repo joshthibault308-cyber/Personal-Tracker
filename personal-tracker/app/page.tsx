@@ -26,10 +26,6 @@ export async function createEntry(formData: FormData) {
 
     redirect('/?{date}');
 
-    return {
-      date, time, duration, type, intensity, soreness, notes
-    }
-
   }
 
 export default function Home() {
