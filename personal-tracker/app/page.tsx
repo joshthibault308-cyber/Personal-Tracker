@@ -17,8 +17,9 @@ export default function Home() {
   const [entries, setEntries] = useState<any[]>([]);
 
   useEffect(() => {
-  setEntries((previousEntries) => [entrySections]);
-  }, [entrySections]);
+    const currentEntries = Object.fromEntries(searchParams.entries())
+    setEntries([currentEntries])
+  }, [entrySections.toString()]);
 
   return (
     <div className="flex relative h-screen flex-col min-h-0">
