@@ -3,14 +3,16 @@
 import Image from "next/image";
 import Entry from "./NewEntries";
 import { jetBrains_Mono} from '@/app/layout'
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {useEffect} from "react";
 import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
   const searchParams = useSearchParams();
-  const entrySections = Object.fromEntries(searchParams.entries());
+  const entrySections = useMemo(() => {
+    Object.fromEntries(searchParams.entries());
+  }, [searchParams]);
 
   const [entries, setEntries] = useState<any[]>([]);
 
