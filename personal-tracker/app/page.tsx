@@ -18,7 +18,7 @@ const searchParams = useSearchParams();
     setEntries([entrySections])
   }, [searchParams.toString()]);
 
-  return;
+  return();
 
 }
 
