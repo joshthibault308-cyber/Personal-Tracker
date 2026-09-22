@@ -9,15 +9,14 @@ import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
-  // const searchParams = useSearchParams();
-  // const entryData = searchParams.getAll;
-  // const entrySections = Object.fromEntries(searchParams.entries());
+  const searchParams = useSearchParams();
+  const entrySections = Object.fromEntries(searchParams.entries());
 
-  // const [entries, setEntries] = useState<any[]>([]);
+  const [entries, setEntries] = useState<any[]>([]);
 
-  // useEffect(() => {
-  // setEntries((previousEntries) => [entrySections]);
-  // }, []);
+  useEffect(() => {
+  setEntries((previousEntries) => [entrySections]);
+  }, []);
 
   return (
     <div className="flex relative h-screen flex-col min-h-0">
@@ -103,9 +102,9 @@ export default function Home() {
 
               <div className="grid gap-5 overflow-y-auto min-h-0">
 
-                {/* {entries.map((entry, index) => (
+                {entries.map((entry, index) => (
                   <Entry key={entry.date + entry.time} Text1={entry.time} Text2={entry.time} Text3={entry.duration} Text4={entry.type} Text5={entry.intensity} Text6={entry.Soreness} Text7={entry.notes} keyNumber={entry.date + entry.time} />
-                ))} */}
+                ))}
 
                 <Entry Text1="03:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
                 <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
