@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
-  const searchParams = useSearchParams();
+  //sconst searchParams = useSearchParams();
   // const [entries, setEntries] = useState<any[]>([]);
 
   // useEffect(() => {
