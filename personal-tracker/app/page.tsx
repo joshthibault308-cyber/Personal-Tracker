@@ -8,8 +8,8 @@ import {useEffect} from "react";
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from "react";
 
-function SearchParams() {
 
+export default function Home() {
 const searchParams = useSearchParams();
   const [entries, setEntries] = useState<any[]>([]);
 
@@ -18,19 +18,10 @@ const searchParams = useSearchParams();
     setEntries([entrySections])
   }, [searchParams.toString()]);
 
-  return();
-
-}
-
-export default function Home() {
   return (
 
     <div className="flex relative h-screen flex-col min-h-0">
-
-      <Suspense>
-      <SearchParams/>
-      </Suspense>
-
+      
       <Image
         src="/Wood Background.jpg" alt="Background Image" fill className="object-cover -z-10"
       />
