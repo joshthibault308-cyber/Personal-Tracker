@@ -3,23 +3,20 @@
 import Image from "next/image";
 import Entry from "./NewEntries";
 import { jetBrains_Mono} from '@/app/layout'
-import {useMemo, useState} from "react";
+import {useState} from "react";
 import {useEffect} from "react";
 import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
   const searchParams = useSearchParams();
-  const entrySections = useMemo(() => {
-    return Object.fromEntries(searchParams.entries());
-  }, [searchParams]);
 
   const [entries, setEntries] = useState<any[]>([]);
 
   useEffect(() => {
-    const currentEntries = Object.fromEntries(searchParams.entries())
-    setEntries([currentEntries])
-  }, [entrySections.toString()]);
+    const entrySections = Object.fromEntries(searchParams.entries())
+    setEntries([entrySections])
+  }, [searchParams.toString()]);
 
   return (
     <div className="flex relative h-screen flex-col min-h-0">
