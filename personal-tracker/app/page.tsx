@@ -10,13 +10,12 @@ import { useSearchParams } from 'next/navigation'
 export default function Home() {
 
   const searchParams = useSearchParams();
+  // const [entries, setEntries] = useState<any[]>([]);
 
-  const [entries, setEntries] = useState<any[]>([]);
-
-  useEffect(() => {
-    const entrySections = Object.fromEntries(searchParams.entries())
-    setEntries([entrySections])
-  }, [searchParams.toString()]);
+  // useEffect(() => {
+  //   const entrySections = Object.fromEntries(searchParams.entries())
+  //   setEntries([entrySections])
+  // }, [searchParams.toString()]);
 
   return (
     <div className="flex relative h-screen flex-col min-h-0">
