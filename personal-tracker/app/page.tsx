@@ -8,7 +8,7 @@ import {useEffect} from "react";
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from "react";
 
-export function SearchParams() {
+function SearchParams() {
 
 const searchParams = useSearchParams();
   const [entries, setEntries] = useState<any[]>([]);
@@ -18,6 +18,8 @@ const searchParams = useSearchParams();
     setEntries([entrySections])
   }, [searchParams.toString()]);
 
+  return();
+
 }
 
 export default function Home() {
@@ -26,7 +28,7 @@ export default function Home() {
     <div className="flex relative h-screen flex-col min-h-0">
 
       <Suspense>
-      SearchParams();
+      <SearchParams/>
       </Suspense>
 
       <Image
