@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
-import { createEntry } from  "@/app/page";
+import { createEntry } from  "@/app/entrydata";
 
 
 export default function Create() {
     return (
-        <div className="flex h-screen flex-col min-h-0">
+        <div className="flex relative h-screen flex-col min-h-0">
 
             <Image
                 src="/Wood Background.jpg" alt="Background Image" fill className="object-cover -z-10"
@@ -38,7 +38,7 @@ export default function Create() {
                             </div>
 
                             <div>
-                                Duration
+                                Duration (Minutes)
                             </div>
                             <div className="flex bg-[#FFFFFF]">
                                 <input type="text" name="duration" />

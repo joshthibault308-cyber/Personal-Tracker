@@ -2,39 +2,25 @@
 
 import Image from "next/image";
 import Entry from "./NewEntries";
-import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
-import Form from "next/form";
-import Link from "next/link";
+import { jetBrains_Mono} from '@/app/layout'
 import {useState} from "react";
-import { redirect } from "next/navigation";
-
-export async function createEntry(formData: FormData) {
-
-    const date = formData.get('date')?.toString() || ' '
-    const time = formData.get('time')?.toString() || ' '
-    const duration = formData.get('duration')
-    const type = formData.get('type')
-    const intensity = formData.get('intensity')
-    const soreness = formData.get('soreness')
-    const notes = formData.get('notes')
-
-    //handleCreateEntry(formData, setStatus);
-    //setStatus(prevEntries => [...prevEntries, `Date: ${date}, Time: ${time}, Duration: ${duration}, Type: ${type}, Intensity: ${intensity}, Soreness: ${soreness}, Notes: ${notes}`]);
-
-    console.log('Submitted date:', date)
-    console.log('Submitted time:', time)
-
-    redirect('/?{date}');
-
-  }
+import {useEffect} from "react";
+import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
 
-  const [entries, setEntries] = useState<string[]>([]);
-  const formData = new FormData();
+  const searchParams = useSearchParams();
+  const entryData = searchParams.getAll;
+  const entrySections = Object.fromEntries(searchParams.entries());
+
+  const [entries, setEntries] = useState<any[]>([]);
+
+  useEffect(() => {
+  setEntries((previousEntries) => [entrySections]);
+  }, []);
 
   return (
-    <div className="flex h-screen flex-col min-h-0">
+    <div className="flex relative h-screen flex-col min-h-0">
 
       <Image
         src="/Wood Background.jpg" alt="Background Image" fill className="object-cover -z-10"
@@ -64,18 +50,18 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-1 ml-[1%] min-h-0 gap-4">
+      <div className="grid sm:flex flex-1 ml-[1%] min-h-0">
 
-        <div className="flex flex-col w-[62%] h-full gap-10">
+        <div className="flex flex-col h-60 sm:w-[62%] sm:h-full gap-10 min-h-0">
 
-          <main className="flex flex-col h-full">
+          <main className="flex flex-col min-h-0">
 
             <div className="flex flex-col text-center text-[5vw] text-[#000000]">
               March 5th
             </div>
 
             <div className="grid min-h-0 gap-5">
-              <div className={`${jetBrains_Mono.className} grid h-[5%] grid-flow-col auto-cols-fr gap-4 text-[1cqw]`}>
+              <div className={`${jetBrains_Mono.className} grid h-[5%] grid-flow-col auto-cols-fr gap-4 text-[1.5cqw] sm:text-[1cqw]`}>
                 <div
                   className="flex items-center justify-center text-center rounded-full bg-[#F8CF89] text-[#000000]">
                   Time
@@ -115,16 +101,17 @@ export default function Home() {
 
               </div>
 
-              <div className="grid gap-5 overflow-y-auto">
+              <div className="grid gap-5 overflow-y-auto min-h-0">
 
                 {entries.map((entry, index) => (
-                  <Entry Text1={entry} Text2={"hi"} Text3={"hi2"} Text4={"hi5"} Text5={"hi6"} Text6={"hi7"} Text7={"hi8"} />
+                  <Entry key={entry.date + entry.time} Text1={entry.time} Text2={entry.time} Text3={entry.duration} Text4={entry.type} Text5={entry.intensity} Text6={entry.Soreness} Text7={entry.notes} keyNumber={entry.date + entry.time} />
                 ))}
 
-                <Entry Text1="3pm" Text2="3:30pm" Text3="30 minutes" Text4="Running" Text5="High" Text6="Low" Text7="N/A"/>
-
-
-
+                <Entry Text1="03:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
+                <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
+                <Entry Text1="03:010" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
+                
+                
               </div>
 
             </div>
@@ -134,7 +121,7 @@ export default function Home() {
 
         <div className="flex flex-1 items-center justify-center">
           <Image
-            src="/Quote.jpg" alt="Background Image" width={400} height={200} className="object-cover"
+            src="/Quote.jpg" alt="Background Image" width={100} height={50} className="relative object-contain w-auto h-auto sm:w-full sm:h-full"
           />
         </div>
 
