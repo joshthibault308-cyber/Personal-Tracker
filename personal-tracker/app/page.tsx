@@ -2,23 +2,32 @@
 
 import Image from "next/image";
 import Entry from "./NewEntries";
-import { jetBrains_Mono} from '@/app/layout'
+import {jetBrains_Mono} from '@/app/layout'
 import {useState} from "react";
 import {useEffect} from "react";
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from "react";
+
+export function SearchParams() {
+
+const searchParams = useSearchParams();
+  const [entries, setEntries] = useState<any[]>([]);
+
+  useEffect(() => {
+    const entrySections = Object.fromEntries(searchParams.entries())
+    setEntries([entrySections])
+  }, [searchParams.toString()]);
+
+}
 
 export default function Home() {
-
-  //sconst searchParams = useSearchParams();
-  // const [entries, setEntries] = useState<any[]>([]);
-
-  // useEffect(() => {
-  //   const entrySections = Object.fromEntries(searchParams.entries())
-  //   setEntries([entrySections])
-  // }, [searchParams.toString()]);
-
   return (
+
     <div className="flex relative h-screen flex-col min-h-0">
+
+      <Suspense>
+      SearchParams();
+      </Suspense>
 
       <Image
         src="/Wood Background.jpg" alt="Background Image" fill className="object-cover -z-10"
