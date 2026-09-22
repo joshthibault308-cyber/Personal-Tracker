@@ -11,14 +11,14 @@ export default function Home() {
 
   const searchParams = useSearchParams();
   const entrySections = useMemo(() => {
-    Object.fromEntries(searchParams.entries());
+    return Object.fromEntries(searchParams.entries());
   }, [searchParams]);
 
   const [entries, setEntries] = useState<any[]>([]);
 
   useEffect(() => {
   setEntries((previousEntries) => [entrySections]);
-  }, []);
+  }, [entrySections]);
 
   return (
     <div className="flex relative h-screen flex-col min-h-0">
