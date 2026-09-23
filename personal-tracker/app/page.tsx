@@ -121,7 +121,7 @@ export default function Home() {
 
                   <Entry Text1="3:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
                   <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="03:010" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
+                  <Entry Text1="03:10" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
 
 
                 </div>
