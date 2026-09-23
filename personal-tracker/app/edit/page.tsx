@@ -70,7 +70,7 @@ export default function Edit() {
                     </div>
 
                     <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                        <a className="justify-center rounded-full bg-[#FFCD75]">
+                        <a href="/" className="justify-center rounded-full bg-[#FFCD75]">
                             Confirm
                         </a>
                     </div>

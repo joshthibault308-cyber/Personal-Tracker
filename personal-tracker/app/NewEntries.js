@@ -1,7 +1,7 @@
 import Image from "next/image";
 import EntryBlock from "./EntryBlock";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
-export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, Text7, keyNumber }) {
+export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, Text7, keyNumber, deleteFunction }) {
   if (Text1) {
   const date = new Date("2026-01-01T" + Text2 + ":00Z");
   const milDate = (date.setMinutes(date.getMinutes()) + (Text3.replace(/\D/g,"") * 60 * 1000)).toString();
@@ -28,9 +28,11 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, Text7,
         </a>
 
         <div className="flex justify-center w-1/2 aspect-square rounded-full bg-[#FF9B9B]">
+          <button className="flex justify-center" onClick={deleteFunction}>
           <Image
             src="/Minus Symbol.png" alt="Minus" width={400} height={200} className="w-2/3"
           />
+          </button>
         </div>
       </div>
 
