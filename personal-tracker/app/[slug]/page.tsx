@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Entry from "../NewEntries";
-import {jetBrains_Mono} from '@/app/layout'
+import { jetBrains_Mono } from '@/app/layout'
 
-export default async function Home({params,}: {params: Promise<{slug: string}> }) {
-    const {slug} = await params
+export default async function Home({ params, }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
   return (
 
@@ -22,14 +22,14 @@ export default async function Home({params,}: {params: Promise<{slug: string}> }
             Create Entry
           </a>
           <div className="flex gap-[10%] items-center">
-            <a href={(+slug-1 !== 0) ? `/${(+slug-1)}` : ``}>
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
+            <a href={(+slug - 1 !== 0) ? `/${(+slug - 1)}` : ``}>
+              <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
             </a>
             <div className="flex text-[#000000]">
               {slug}/3
             </div>
-            <a href={(+slug+1 !==4) ? `/${(+slug+1)}` : ``}>
-            <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
+            <a href={(+slug + 1 !== 4) ? `/${(+slug + 1)}` : ``}>
+              <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
             </a>
           </div>
           <a
@@ -94,11 +94,7 @@ export default async function Home({params,}: {params: Promise<{slug: string}> }
 
               <div className="grid gap-5 overflow-y-auto min-h-0">
 
-                <Entry Text1="03:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
-                <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
-                <Entry Text1="03:010" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" />
-                
-                
+
               </div>
 
             </div>
