@@ -3,7 +3,7 @@ import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 
 export default function Edit() {
     return (
-        <div className="flex h-screen flex-col min-h-0">
+        <div className="flex relative h-screen flex-col min-h-0">
 
             <Image
                 src="/Wood Background.jpg" alt="Background Image" fill className="object-cover -z-10"
@@ -70,7 +70,7 @@ export default function Edit() {
                     </div>
 
                     <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                        <a className="justify-center rounded-full bg-[#FFCD75]">
+                        <a href="/" className="justify-center rounded-full bg-[#FFCD75]">
                             Confirm
                         </a>
                     </div>

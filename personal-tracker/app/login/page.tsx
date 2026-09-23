@@ -36,7 +36,8 @@ export default function Login() {
             </div>
 
             <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                <a className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]">
+                <a className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]"
+                href="/">
                 Login
                 </a>
             </div>
