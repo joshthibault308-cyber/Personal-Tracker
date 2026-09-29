@@ -20,8 +20,8 @@ export default function Home() {
 
     <div>
       {deleteisOpen &&
-          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[60vw] h-[50vw] rounded-[50] bg-[#fad79b] z-1">
-          <div className="">Are you sure you want to delete this item?</div>
+          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] rounded-[50] bg-[#fad79b] z-1">
+          <div className="flex text-center">Are you sure you want to delete this item?</div>
           <div className="flex flex-1 gap-10">
           <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
             Yes
@@ -119,9 +119,9 @@ export default function Home() {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
 
-                  <Entry Text1="3:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="03:10" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
+                  <Entry Text1="3:08" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
+                  <Entry Text1="3:09" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
+                  <Entry Text1="3:10" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
 
 
                 </div>
