@@ -8,9 +8,22 @@ import { useState } from "react";
 export default function Home() {
   const pageNumber = 3;
   const [deleteisOpen, setDeleteisOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState("0");
 
-  const handleDeleteButton = () => {
+  const [entries, setEntries] = useState([
+    {Text1:"03:08",Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
+    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
+    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
+  ])
+
+  const handleDeleteButton = (ID: string) => {
     setDeleteisOpen(true);
+    setDeleteID(ID);
+  }
+  const deleteButton = () => {
+    setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
+    setDeleteID("null");
+    setDeleteisOpen(false);
   }
 
   return (
@@ -20,7 +33,7 @@ export default function Home() {
           (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] lg:w-[25vw] lg:h-[21vw] rounded-[50] bg-[#fad79b] z-1">
           <div className="flex text-center">Are you sure you want to delete this item?</div>
           <div className="flex flex-1 gap-10 ml-2 mr-2">
-          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
+          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => deleteButton()}>
             Yes
           </button>
           <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
@@ -116,10 +129,9 @@ export default function Home() {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
 
-                  <Entry Text1="3:08" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="3:09" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="3:10" Text2="03:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-
+                  {entries.map((entry) => (
+                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} keyNumber={entry.keyNumber} deleteFunction={() => handleDeleteButton(entry.keyNumber)}/>
+                  ))}
 
                 </div>
 
