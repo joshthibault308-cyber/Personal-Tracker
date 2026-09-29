@@ -28,7 +28,7 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, keyNum
         </a>
 
         <div className="flex justify-center w-1/2 aspect-square rounded-full bg-[#FF9B9B]">
-          <button id={keyNumber} className="flex justify-center" onClick={deleteFunction(keyNumber)}>
+          <button id={keyNumber} className="flex justify-center" onClick={deleteFunction}>
           <Image
             src="/Minus Symbol.png" alt="Minus" width={400} height={200} className="w-2/3"
           />

@@ -3,22 +3,48 @@
 import Image from "next/image";
 import Entry from "./NewEntries";
 import { jetBrains_Mono } from '@/app/layout'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation"
 
 export default function Home() {
+
+interface EntryIem {
+    Text1: string | null;
+    Text2: string | null;
+    Text3: string | null;
+    Text4: string | null;
+    Text5: string | null;
+    Text6: string | null;
+    keyNumber: string | null;
+  }
+
+  const [entries, setEntries] = useState<EntryIem[]>([]);
+
+  useEffect(() => { setEntries((previousItems) => [
+    {Text1:"03:08", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
+    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
+    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
+  ]);}, []);
+
+  const searchParams = useSearchParams();
+
   const pageNumber = 3;
   const [deleteisOpen, setDeleteisOpen] = useState(false);
   const [deleteID, setDeleteID] = useState("0");
 
-  const [entries, setEntries] = useState([
-    {Text1:"03:08",Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
-    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
-    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
-  ])
+  useEffect(() => {
+    if (searchParams.get("date")) {
+      setEntries((previousEntries) => {
+      if (previousEntries.some((item) => item.keyNumber === searchParams.get("date"))) {
+        return previousEntries;
+      }
+      return [
+    ...previousEntries, {Text1: searchParams.get("time"), Text2: searchParams.get("duration"), Text3: searchParams.get("type"), Text4: searchParams.get("intensity"), Text5: searchParams.get("soreness"), Text6: searchParams.get("notes"), keyNumber: searchParams.get("date")}
+    ]});}}, [searchParams]);
 
-  const handleDeleteButton = (ID: string) => {
+  const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
     setDeleteisOpen(true);
-    setDeleteID(ID);
+    setDeleteID(Button.currentTarget.id);
   }
   const deleteButton = () => {
     setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
@@ -130,7 +156,7 @@ export default function Home() {
                 <div className="grid gap-5 overflow-y-auto min-h-0">
 
                   {entries.map((entry) => (
-                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} keyNumber={entry.keyNumber} deleteFunction={() => handleDeleteButton(entry.keyNumber)}/>
+                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} keyNumber={entry.keyNumber} deleteFunction={handleDeleteButton}/>
                   ))}
 
                 </div>
