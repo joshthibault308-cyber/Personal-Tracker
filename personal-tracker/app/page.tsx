@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Entry from "./NewEntries";
+import EntryList from "./EntryList";
 import { jetBrains_Mono } from '@/app/layout'
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation"
 
 export default function Home() {
 
-interface EntryIem {
+interface EntryItem {
     Text1: string | null;
     Text2: string | null;
     Text3: string | null;
@@ -18,7 +19,7 @@ interface EntryIem {
     keyNumber: string | null;
   }
 
-  const [entries, setEntries] = useState<EntryIem[]>([]);
+  const [entries, setEntries] = useState<EntryItem[]>([]);
 
   useEffect(() => { setEntries((previousItems) => [
     {Text1:"03:08", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
@@ -26,21 +27,9 @@ interface EntryIem {
     {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
   ]);}, []);
 
-  const searchParams = useSearchParams();
-
   const pageNumber = 3;
   const [deleteisOpen, setDeleteisOpen] = useState(false);
   const [deleteID, setDeleteID] = useState("0");
-
-  useEffect(() => {
-    if (searchParams.get("date")) {
-      setEntries((previousEntries) => {
-      if (previousEntries.some((item) => item.keyNumber === searchParams.get("date"))) {
-        return previousEntries;
-      }
-      return [
-    ...previousEntries, {Text1: searchParams.get("time"), Text2: searchParams.get("duration"), Text3: searchParams.get("type"), Text4: searchParams.get("intensity"), Text5: searchParams.get("soreness"), Text6: searchParams.get("notes"), keyNumber: searchParams.get("date")}
-    ]});}}, [searchParams]);
 
   const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
     setDeleteisOpen(true);
@@ -154,10 +143,9 @@ interface EntryIem {
                 </div>
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
-
-                  {entries.map((entry) => (
-                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} keyNumber={entry.keyNumber} deleteFunction={handleDeleteButton}/>
-                  ))}
+                <Suspense>
+                  <EntryList entries={entries} setEntries={setEntries} handledeleteButton={handleDeleteButton} />
+                  </Suspense>
 
                 </div>
 
