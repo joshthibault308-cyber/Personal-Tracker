@@ -4,9 +4,6 @@ import Image from "next/image";
 import Entry from "./NewEntries";
 import { jetBrains_Mono } from '@/app/layout'
 import { useState } from "react";
-import { useEffect } from "react";
-import { useSearchParams } from 'next/navigation'
-import { Suspense } from "react";
 
 export default function Home() {
   const pageNumber = 3;
@@ -20,9 +17,9 @@ export default function Home() {
 
     <div>
       {deleteisOpen &&
-          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] rounded-[50] bg-[#fad79b] z-1">
+          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] lg:w-[25vw] lg:h-[21vw] rounded-[50] bg-[#fad79b] z-1">
           <div className="flex text-center">Are you sure you want to delete this item?</div>
-          <div className="flex flex-1 gap-10">
+          <div className="flex flex-1 gap-10 ml-2 mr-2">
           <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
             Yes
           </button>
