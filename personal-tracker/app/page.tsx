@@ -2,28 +2,53 @@
 
 import Image from "next/image";
 import Entry from "./NewEntries";
+import EntryList from "./EntryList";
 import { jetBrains_Mono } from '@/app/layout'
-import { useState } from "react";
-import { useEffect } from "react";
-import { useSearchParams } from 'next/navigation'
-import { Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation"
 
 export default function Home() {
+
+interface EntryItem {
+    Text1: string | null;
+    Text2: string | null;
+    Text3: string | null;
+    Text4: string | null;
+    Text5: string | null;
+    Text6: string | null;
+    keyNumber: string | null;
+  }
+
+  const [entries, setEntries] = useState<EntryItem[]>([]);
+
+  useEffect(() => { setEntries((previousItems) => [
+    {Text1:"03:08", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
+    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
+    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
+  ]);}, []);
+
   const pageNumber = 3;
   const [deleteisOpen, setDeleteisOpen] = useState(false);
+  const [deleteID, setDeleteID] = useState("0");
 
-  const handleDeleteButton = () => {
+  const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
     setDeleteisOpen(true);
+    setDeleteID(Button.currentTarget.id);
+  }
+  const deleteButton = () => {
+    setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
+    setDeleteID("null");
+    setDeleteisOpen(false);
   }
 
   return (
 
     <div>
       {deleteisOpen &&
-          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[60vw] h-[50vw] rounded-[50] bg-[#fad79b] z-1">
-          <div className="">Are you sure you want to delete this item?</div>
-          <div className="flex flex-1 gap-10">
-          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
+          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] lg:w-[25vw] lg:h-[21vw] rounded-[50] bg-[#fad79b] z-1">
+          <div className="flex text-center">Are you sure you want to delete this item?</div>
+          <div className="flex flex-1 gap-10 ml-2 mr-2">
+          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => deleteButton()}>
             Yes
           </button>
           <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
@@ -118,11 +143,9 @@ export default function Home() {
                 </div>
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
-
-                  <Entry Text1="3:08" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="03:09" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-                  <Entry Text1="03:10" Text2="3:08" Text3="30 minutes" Text4="Running" Text5="Low" Text6="Low" Text7="N/A" keyNumber="N/A" deleteFunction={handleDeleteButton} />
-
+                <Suspense>
+                  <EntryList entries={entries} setEntries={setEntries} handledeleteButton={handleDeleteButton} />
+                  </Suspense>
 
                 </div>
 
@@ -131,9 +154,9 @@ export default function Home() {
             </main>
           </div>
 
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-1 items-center justify-center sm:mt-10 sm:mb-10 sm:ml-10 sm:mr-10">
             <Image
-              src="/Quote.jpg" alt="Background Image" width={100} height={50} className="relative object-contain w-auto h-auto sm:w-full sm:h-full"
+              src="/Quote 3.jpg" alt="Background Image" width={200} height={100} className="relative object-contain w-[400px] h-[200px] sm:w-full sm:h-full"
             />
           </div>
 

@@ -22,7 +22,7 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
             Create Entry
           </a>
           <div className="flex gap-[10%] items-center">
-            <a href={(+slug - 1 !== 0) ? `/${(+slug - 1)}` : ``}>
+            <a href={(+slug - 1 !== 1) ? `/${(+slug - 1)}` : `/`}>
               <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
             </a>
             <div className="flex text-[#000000]">
@@ -102,9 +102,9 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
           </main>
         </div>
 
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center sm:mt-10 sm:mb-10 sm:ml-10 sm:mr-10">
           <Image
-            src="/Quote.jpg" alt="Background Image" width={100} height={50} className="relative object-contain w-auto h-auto sm:w-full sm:h-full"
+            src="/Quote 3.jpg" alt="Background Image" width={200} height={100} className="relative object-contain w-[400px] h-[200px] sm:w-full sm:h-full"
           />
         </div>
 
