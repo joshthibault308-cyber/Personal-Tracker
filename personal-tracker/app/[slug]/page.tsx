@@ -102,9 +102,9 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
           </main>
         </div>
 
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center sm:mt-10 sm:mb-10 sm:ml-10 sm:mr-10">
           <Image
-            src="/Quote.jpg" alt="Background Image" width={100} height={50} className="relative object-contain w-auto h-auto sm:w-full sm:h-full"
+            src="/Quote 3.jpg" alt="Background Image" width={200} height={100} className="relative object-contain w-[400px] h-[200px] sm:w-full sm:h-full"
           />
         </div>
 
