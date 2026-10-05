@@ -48,7 +48,18 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
           <main className="flex flex-col min-h-0">
 
             <div className="flex flex-col text-center text-[5vw] text-[#000000]">
-              March 5th
+              March {(() => {
+                switch (+slug + 4) {
+                  case (1): return "1st";
+                  case (2): return "2nd";
+                  case (3): return "3rd";
+                  case (21): return "21st";
+                  case (22): return "22nd";
+                  case (23): return "23rd";
+                  case (31): return "31st";
+                  default: return (+slug + 4) +"th";
+                }
+              })()}
             </div>
 
             <div className="grid min-h-0 gap-5">
