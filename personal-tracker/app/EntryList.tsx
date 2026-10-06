@@ -35,8 +35,8 @@ export default function EntryList({entries, setEntries, handledeleteButton}: Ent
     return (
         <>
             {
-                entries.map((entry) => (
-                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} keyNumber={entry.keyNumber} deleteFunction={handledeleteButton} />
+                entries.map((entry, index) => (
+                    <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} rowNumber={index} keyNumber={entry.keyNumber} deleteFunction={handledeleteButton} />
                 ))
             }
         </>
