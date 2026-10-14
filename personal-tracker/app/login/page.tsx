@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
+import { login, signup } from "./actions";
 
 export default function Login() {
     return (
@@ -19,32 +20,37 @@ export default function Login() {
                 </div>
             </div>
 
+        <form>
         <div className="grid flex-1 gap-3">
+            
             <div className={`${aBeeZee.className} grid justify-center text-[3vw] text-[#000000]`}>
                 <div>
                     Username
                 </div>
                 <div className="flex bg-[#FFFFFF]">
-                    <input type="text" id="username"/>
+                    <input type="text" required name="email" id="email"/>
                 </div>
                 <div>
                     Password
                 </div>
                 <div className="flex bg-[#FFFFFF]">
-                    <input type="password" id="password"/>
+                    <input type="password" required name="password" id="password"/>
                 </div>
             </div>
+            
 
             <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                <a className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]"
-                href="/">
-                Login
-                </a>
+                <button className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]" formAction={login}>
+                    Login
+                </button>
             </div>
             </div>
 
-            </div>
+            </form>
 
+        </div>
+
+        
         </div>
     )
 }
