@@ -5,7 +5,7 @@ import Entry from "./NewEntries";
 import EntryList from "./EntryList";
 import { jetBrains_Mono } from '@/app/layout'
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
 
