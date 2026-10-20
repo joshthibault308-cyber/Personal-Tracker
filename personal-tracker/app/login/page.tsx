@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
+import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout';
 import { login, signup } from "./actions";
 
 export default function Login() {

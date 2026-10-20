@@ -5,27 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from "next/headers";
 
-export async function login (formData: FormData) {
-
-const cookieStore = await cookies();
-const supabase = createClient(cookieStore);
-
-const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-}
-
-const { error } = await supabase.auth.signInWithPassword(data)
-
-if (error) {
-}
-
-revalidatePath('/')
-redirect('/')
-
-}
-
-export async function signup (formData: FormData) {
+export async function login(formData: FormData) {
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
@@ -35,12 +15,36 @@ export async function signup (formData: FormData) {
         password: formData.get('password') as string,
     }
 
-    const { error} = await supabase.auth.signUp(data)
+    const { error } = await supabase.auth.signInWithPassword(data)
 
     if (error) {
+    } else {
+
+        revalidatePath('/')
+        redirect('/')
+
     }
 
-    revalidatePath('/')
-    redirect('/')
+}
+
+export async function signup(formData: FormData) {
+
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+
+    const data = {
+        email: formData.get('email') as string,
+        password: formData.get('password') as string,
+    }
+
+    const { error } = await supabase.auth.signUp(data)
+
+    if (error) {
+    } else {
+
+        revalidatePath('/')
+        redirect('/')
+
+    }
 
 }
