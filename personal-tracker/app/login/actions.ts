@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 export async function login(formData: FormData) {
 
     const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = await createClient(cookieStore);
 
     const data = {
         email: formData.get('email') as string,
