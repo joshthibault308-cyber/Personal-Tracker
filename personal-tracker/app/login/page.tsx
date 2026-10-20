@@ -41,7 +41,7 @@ export default function Login() {
             
 
             <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                <button className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]" formAction={login}>
+                <button className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]" formAction={async (formData) => {await login(formData)}}>
                     Login
                 </button>
             </div>
