@@ -21,7 +21,7 @@ export default function Login() {
                 </div>
             </div>
 
-        <form>
+        <form action={login}>
         <div className="grid flex-1 gap-3">
             
             <div className={`${aBeeZee.className} grid justify-center text-[3vw] text-[#000000]`}>
@@ -41,7 +41,7 @@ export default function Login() {
             
 
             <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                <button className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]" formAction={async (formData) => {await login(formData)}}>
+                <button type="submit" className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]">
                     Login
                 </button>
             </div>

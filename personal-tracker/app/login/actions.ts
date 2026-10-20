@@ -18,7 +18,8 @@ export async function login(formData: FormData) {
     const { error } = await supabase.auth.signInWithPassword(data)
 
     if (error) {
-        return { error: error.message };
+        console.error("Login Error: ", error.message);
+        return;
     }
         redirect('/')
 
@@ -28,7 +29,7 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
 
     const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = await createClient(cookieStore);
 
     const data = {
         email: formData.get('email') as string,
@@ -38,7 +39,8 @@ export async function signup(formData: FormData) {
     const { error } = await supabase.auth.signUp(data)
 
     if (error) {
-        return { error: error.message };
+        console.error("Signup Error: ", error.message);
+        return;
     }
 
         redirect('/')
