@@ -23,11 +23,6 @@ export default async function Create() {
             .insert(formData)
             .select()
 
-            if (error) {
-            console.error("Supabase Database Insert Error:", error.message);
-        } else {
-            console.log("Successfully inserted entry into database:", newEntry);
-        }
     };
 
     return (
