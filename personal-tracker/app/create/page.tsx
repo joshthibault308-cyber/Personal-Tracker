@@ -1,10 +1,30 @@
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
-import { createEntry } from  "@/app/entrydata";
+import { supabaseComponent } from "@/app/utils/supabase";
 
 
-export default function Create() {
+export default async function Create() {
+
+    const createEntry = async (data: any) => {
+        "use server";
+        const formData = {
+            date: data.get('date'),
+            time: data.get('time'),
+            duration: data.get('duration'),
+            type: data.get('type'),
+            intensity: data.get('intensity'),
+            soreness: data.get('soreness'),
+            notes: data.get('notes'),
+        };
+
+        const {data: newEntry, error} = await supabaseComponent
+            .from('entries')
+            .insert(formData)
+            .select()
+
+    };
+
     return (
         <div className="flex relative h-screen flex-col min-h-0">
 

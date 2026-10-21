@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
+import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout';
 import { login, signup } from "./actions";
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
                 </div>
             </div>
 
-        <form>
+        <form action={login}>
         <div className="grid flex-1 gap-3">
             
             <div className={`${aBeeZee.className} grid justify-center text-[3vw] text-[#000000]`}>
@@ -40,7 +41,7 @@ export default function Login() {
             
 
             <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                <button className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]" formAction={login}>
+                <button type="submit" className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]">
                     Login
                 </button>
             </div>
