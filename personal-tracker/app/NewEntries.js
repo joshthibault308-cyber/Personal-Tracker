@@ -3,11 +3,11 @@ import EntryBlock from "./EntryBlock";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import { useState, useEffect } from "react";
 
-export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNumber, keyNumber, deleteFunction }) {
+export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNumber, keyNumber }) {
 
   if (Text1) {
-    const date = new Date("2026-01-01T" + Text1 + ":00Z");
-    const milDate = (date.setMinutes(date.getMinutes()) + (Text2.replace(/\D/g, "") * 60 * 1000)).toString();
+    const date = new Date("2026-01-01T" + Text1 + "Z");
+    const milDate = (date.setMinutes(date.getMinutes()) + Text2 * 60 * 1000).toString();
     const hours = Math.floor((milDate / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((milDate / (1000 * 60)) % 60);
 
@@ -37,7 +37,7 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNum
           </a>
 
           <div className="flex justify-center w-1/2 aspect-square rounded-full bg-[#FF9B9B]">
-            <button id={keyNumber} className="flex justify-center" onClick={deleteFunction}>
+            <button id={keyNumber} className="flex justify-center" >
               <Image
                 src="/Minus Symbol.png" alt="Minus" width={400} height={200} className="w-2/3"
               />

@@ -21,20 +21,14 @@ interface EntryItem {
 
   const [entries, setEntries] = useState<EntryItem[]>([]);
 
-  useEffect(() => { setEntries((previousItems) => [
-    {Text1:"03:08", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
-    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
-    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
-  ]);}, []);
-
   const pageNumber = 3;
   const [deleteisOpen, setDeleteisOpen] = useState(false);
   const [deleteID, setDeleteID] = useState("0");
 
-  const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
-    setDeleteisOpen(true);
-    setDeleteID(Button.currentTarget.id);
-  }
+  // const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
+  //   setDeleteisOpen(true);
+  //   setDeleteID(Button.currentTarget.id);
+  // }
   const deleteButton = () => {
     setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
     setDeleteID("null");
@@ -144,7 +138,7 @@ interface EntryItem {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
                 <Suspense>
-                  <EntryList entries={entries} setEntries={setEntries} handledeleteButton={handleDeleteButton} />
+                  <EntryList />
                   </Suspense>
 
                 </div>
