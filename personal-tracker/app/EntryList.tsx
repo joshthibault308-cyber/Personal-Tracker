@@ -1,3 +1,5 @@
+"use client"
+
 import Entry from "./NewEntries";
 import { useSearchParams } from "next/navigation"
 import { useEffect, Dispatch, SetStateAction } from "react";
@@ -20,7 +22,7 @@ interface EntryItem {
 //     handledeleteButton: (key: any) => void;
 // }
 
-function EntryList() {
+export default function EntryList({user}: {user: String}) {
     const searchParams = useSearchParams();
 
     const [entries, setEntries] = useState<EntryItem[]>([]);
@@ -45,10 +47,12 @@ function EntryList() {
                         Text4: entry.intensity,
                         Text5: entry.soreness,
                         Text6: entry.notes,
-                        keyNumber: entry.id
+                        keyNumber: entry.id,
+                        user: entry.user
                     }));
                     //const filteredData = data[0];
-                    setEntries(formattedEntries);
+                    const filteredEntries = formattedEntries.filter((entry) => entry.user === user);
+                    setEntries(filteredEntries);
                 }
             } catch (error: any) {
                 setError(error.message);
@@ -68,16 +72,16 @@ function EntryList() {
     )
 }
 
-export default function Entries() {
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <EntryList />
-        </Suspense>
-        // EntryList.map((entry, index) => (
-        //             <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} rowNumber={index} keyNumber={entry.keyNumber} deleteFunction={handledeleteButton} />
-        //         ))
-    );
-}
+// export default function Entries() {
+//     return (
+//         <Suspense fallback={<div>Loading...</div>}>
+//             <EntryList />
+//         </Suspense>
+//         // EntryList.map((entry, index) => (
+//         //             <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} rowNumber={index} keyNumber={entry.keyNumber} deleteFunction={handledeleteButton} />
+//         //         ))
+//     );
+// }
 
 //     const searchParams = useSearchParams();
 
