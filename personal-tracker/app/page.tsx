@@ -144,7 +144,7 @@ interface EntryItem {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
                 <Suspense>
-                  <EntryList user={user.email?.toString()} />
+                  <EntryList user={user.email?.toString() ?? ""} />
                   </Suspense>
 
                 </div>

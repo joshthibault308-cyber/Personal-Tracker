@@ -22,7 +22,7 @@ interface EntryItem {
 //     handledeleteButton: (key: any) => void;
 // }
 
-export default function EntryList({user}: {user: String}) {
+export default function EntryList({user}: {user: string}) {
     const searchParams = useSearchParams();
 
     const [entries, setEntries] = useState<EntryItem[]>([]);
