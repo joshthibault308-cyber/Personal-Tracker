@@ -40,10 +40,14 @@ export default function Login() {
             </div>
             
 
-            <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
+            <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] gap-2 text-[#000000]`}>
                 <button type="submit" className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]">
                     Login
                 </button>
+                <a className="flex w-1/8  justify-center rounded-full bg-[#FFCD75]"
+                href="/login/signup">
+                    Signup
+                </a>
             </div>
             </div>
 
