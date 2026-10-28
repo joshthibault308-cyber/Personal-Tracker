@@ -49,11 +49,6 @@ export default function Signup() {
                                 Login
                             </a>
                         </div>
-
-                        <div className={`${aBeeZee.className} grid justify-center text-[2vw] text-[#000000]`}>
-                            Make sure to remember your username and password, as well as verifying your email.
-                        </div>
-
                     </div>
 
                 </form>
