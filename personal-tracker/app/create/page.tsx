@@ -1,10 +1,20 @@
+"use server";
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
 import { supabaseComponent } from "@/app/utils/supabase";
+import { redirect } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/server";
 
 
 export default async function Create() {
+
+    const supabase = await createClient();
+    const { data: { user }, error } = await supabase.auth.getUser()
+
+    if (error || !user) {
+        redirect('/login')
+    }
 
     const createEntry = async (data: any) => {
         "use server";
@@ -16,12 +26,15 @@ export default async function Create() {
             intensity: data.get('intensity'),
             soreness: data.get('soreness'),
             notes: data.get('notes'),
+            user: user.email
         };
 
-        const {data: newEntry, error} = await supabaseComponent
+        const { data: newEntry, error } = await supabaseComponent
             .from('entries')
             .insert(formData)
             .select()
+
+            redirect("/");
 
     };
 

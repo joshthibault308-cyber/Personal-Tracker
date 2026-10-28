@@ -1,13 +1,19 @@
-'use client'
-
 import Image from "next/image";
 import Entry from "./NewEntries";
 import EntryList from "./EntryList";
 import { jetBrains_Mono } from '@/app/layout'
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+
+  const supabase = await createClient();
+  const { data: { user }, error } = await supabase.auth.getUser()
+
+  if (error || !user) {
+    redirect('/login')
+  }
 
 interface EntryItem {
     Text1: string | null;
@@ -19,32 +25,26 @@ interface EntryItem {
     keyNumber: string | null;
   }
 
-  const [entries, setEntries] = useState<EntryItem[]>([]);
-
-  useEffect(() => { setEntries((previousItems) => [
-    {Text1:"03:08", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"1"},
-    {Text1:"03:09", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"2"},
-    {Text1:"03:10", Text2:"30 minutes", Text3:"Running", Text4:"Low", Text5:"Low", Text6:"N/A", keyNumber:"3"},
-  ]);}, []);
+  //const [entries, setEntries] = useState<EntryItem[]>([]);
 
   const pageNumber = 3;
-  const [deleteisOpen, setDeleteisOpen] = useState(false);
-  const [deleteID, setDeleteID] = useState("0");
+  //const [deleteisOpen, setDeleteisOpen] = useState(false);
+  //const [deleteID, setDeleteID] = useState("0");
 
-  const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
-    setDeleteisOpen(true);
-    setDeleteID(Button.currentTarget.id);
-  }
-  const deleteButton = () => {
-    setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
-    setDeleteID("null");
-    setDeleteisOpen(false);
-  }
+  // const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
+  //   setDeleteisOpen(true);
+  //   setDeleteID(Button.currentTarget.id);
+  // }
+  // const deleteButton = () => {
+  //   setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
+  //   setDeleteID("null");
+  //   setDeleteisOpen(false);
+  // }
 
   return (
 
     <div>
-      {deleteisOpen &&
+      {/* {
           (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] lg:w-[25vw] lg:h-[21vw] rounded-[50] bg-[#fad79b] z-1">
           <div className="flex text-center">Are you sure you want to delete this item?</div>
           <div className="flex flex-1 gap-10 ml-2 mr-2">
@@ -55,7 +55,7 @@ interface EntryItem {
             No
           </button>
           </div>
-          </div>)}
+          </div>)} */}
 
       <div className="flex relative h-screen flex-col min-h-0">
 
@@ -144,7 +144,7 @@ interface EntryItem {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
                 <Suspense>
-                  <EntryList entries={entries} setEntries={setEntries} handledeleteButton={handleDeleteButton} />
+                  <EntryList user={user.email?.toString() ?? ""} />
                   </Suspense>
 
                 </div>
