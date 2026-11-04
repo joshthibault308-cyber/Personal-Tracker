@@ -1,13 +1,16 @@
+"use client"
+
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
 import { supabaseComponent } from "@/app/utils/supabase";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 
 export default async function Edit() {
 
-const supabase = await createClient();
+    const supabase = await createClient();
+    const searchParams = useSearchParams();
     const { data: { user }, error } = await supabase.auth.getUser()
 
     if (error || !user) {
@@ -33,7 +36,7 @@ const supabase = await createClient();
             .eq("id", data.get('id'))
             .select()
 
-            redirect("/");
+        redirect("/");
 
     };
 
