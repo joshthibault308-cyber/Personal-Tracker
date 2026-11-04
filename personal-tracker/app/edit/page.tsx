@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
-import SearchParams from "./searchParams";
 import { supabaseComponent } from "@/app/utils/supabase";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
