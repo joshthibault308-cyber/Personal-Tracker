@@ -5,14 +5,22 @@ import { supabaseComponent } from "@/app/utils/supabase";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 
-export default async function Edit() {
+interface EditProps {
+    searchParams: Promise<{[key: string]: string | string[] | undefined}>;
+}
 
-const supabase = await createClient();
+export default async function Edit({ searchParams }: EditProps) {
+
+    const supabase = await createClient();
+
     const { data: { user }, error } = await supabase.auth.getUser()
 
     if (error || !user) {
         redirect('/login')
     }
+
+    const newSearchParams = await searchParams;
+    const id = newSearchParams.id;
 
     const editEntry = async (data: any) => {
         "use server";
@@ -28,12 +36,12 @@ const supabase = await createClient();
         };
 
         const { data: newEntry, error } = await supabaseComponent
-            .from('entries')
-            .update(formData)
-            .eq("id", data.get('id'))
-            .select()
+        .from('entries')
+        .update(formData)
+        .eq("id", id)
+        .select()
 
-            redirect("/");
+        redirect("/");
 
     };
 

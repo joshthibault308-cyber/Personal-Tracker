@@ -30,7 +30,7 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNum
 
         <div className="grid gap-[10%]">
           <a className="w-1/2 aspect-square rounded-full bg-[#FFDF9B]"
-            href={"/edit?" + keyNumber}>
+            href={"/edit?id=" + keyNumber}>
             <Image
               src="/Pencil Icon.png" alt="Pencil" width={400} height={200} className="object-cover rotate-180"
             />
