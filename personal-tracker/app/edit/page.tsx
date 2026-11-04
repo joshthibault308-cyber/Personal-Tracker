@@ -1,7 +1,42 @@
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
+import Form from "next/form";
+import { supabaseComponent } from "@/app/utils/supabase";
+import { redirect } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/server";
 
-export default function Edit() {
+export default async function Edit() {
+
+const supabase = await createClient();
+    const { data: { user }, error } = await supabase.auth.getUser()
+
+    if (error || !user) {
+        redirect('/login')
+    }
+
+    const editEntry = async (data: any) => {
+        "use server";
+        const formData = {
+            date: data.get('date'),
+            time: data.get('time'),
+            duration: data.get('duration'),
+            type: data.get('type'),
+            intensity: data.get('intensity'),
+            soreness: data.get('soreness'),
+            notes: data.get('notes'),
+            user: user.email
+        };
+
+        const { data: newEntry, error } = await supabaseComponent
+            .from('entries')
+            .update(formData)
+            .eq("id", data.get('id'))
+            .select()
+
+            redirect("/");
+
+    };
+
     return (
         <div className="flex relative h-screen flex-col min-h-0">
 
@@ -17,64 +52,66 @@ export default function Edit() {
 
             <div className="grid flex-1 justify-center items-center gap-10 ml-[10%] mr-[10%] mt-[10%] mb-[10%]">
 
-                <div className="grid flex-1 gap-3">
-                    <div className={`${aBeeZee.className} grid justify-center text-[2.5vw] md:text-[1.5rem] text-[#000000] gap-1`}>
-                        <div>
-                            Date (MM/DD/YYYY)
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="date" />
+                <Form action={editEntry}>
+                    <div className="grid flex-1 gap-3">
+                        <div className={`${aBeeZee.className} grid justify-center text-[2.5vw] md:text-[1.5rem] text-[#000000] gap-1`}>
+                            <div>
+                                Date (MM/DD/YYYY)
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="date" />
+                            </div>
+
+                            <div>
+                                Start time (HH:MM)
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="time" />
+                            </div>
+
+                            <div>
+                                Duration (Minutes)
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="duration" />
+                            </div>
+
+                            <div>
+                                Exercise Type
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="type" />
+                            </div>
+
+                            <div>
+                                Intensity
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="intensity" />
+                            </div>
+
+                            <div>
+                                Soreness
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="soreness" />
+                            </div>
+
+                            <div>
+                                Extra Notes
+                            </div>
+                            <div className="flex bg-[#FFFFFF]">
+                                <input type="text" name="notes" />
+                            </div>
                         </div>
 
-                        <div>
-                            Start time (HH:MM)
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="time" />
-                        </div>
-
-                        <div>
-                            Duration
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="duration" />
-                        </div>
-
-                        <div>
-                            Exercise Type
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="type" />
-                        </div>
-
-                        <div>
-                            Intensity
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="intensity" />
-                        </div>
-
-                        <div>
-                            Soreness
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="soreness" />
-                        </div>
-
-                        <div>
-                            Extra Notes
-                        </div>
-                        <div className="flex bg-[#FFFFFF]">
-                            <input type="text" id="notes" />
+                        <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
+                            <button type="submit" className="justify-center rounded-full bg-[#FFCD75]">
+                                Create
+                            </button>
                         </div>
                     </div>
-
-                    <div className={`${jetBrains_Mono.className} flex justify-center text-[2vw] text-[#000000]`}>
-                        <a href="/" className="justify-center rounded-full bg-[#FFCD75]">
-                            Confirm
-                        </a>
-                    </div>
-                </div>
+                </Form>
 
             </div>
 

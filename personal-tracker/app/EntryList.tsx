@@ -16,18 +16,13 @@ interface EntryItem {
     keyNumber: string | null;
 }
 
-// interface EntryProps {
-//     entries: EntryItem[];
-//     setEntries: Dispatch<SetStateAction<EntryItem[]>>;
-//     handledeleteButton: (key: any) => void;
-// }
-
-export default function EntryList({user}: {user: string}) {
+export default function EntryList({user, date}: {user: string, date: string}) {
     const searchParams = useSearchParams();
 
     const [entries, setEntries] = useState<EntryItem[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const currentDate = date.toString().split('T')[0] + 'T00:00:00+00:00';
 
     useEffect(() => {
         async function fetchEntries() {
@@ -41,6 +36,7 @@ export default function EntryList({user}: {user: string}) {
                 } else {
                     setEntries(data);
                      const formattedEntries = data.map((entry) => ({
+                        Text0: entry.date,
                         Text1: entry.time,
                         Text2: entry.duration,
                         Text3: entry.type,
@@ -50,9 +46,12 @@ export default function EntryList({user}: {user: string}) {
                         keyNumber: entry.id,
                         user: entry.user
                     }));
-                    //const filteredData = data[0];
+
+                    const currentDate = date + 'T00:00:00+00:00';
+
                     const filteredEntries = formattedEntries.filter((entry) => entry.user === user);
-                    setEntries(filteredEntries);
+                    const dateFilteredEntries = filteredEntries.filter((entry) => entry.Text0 === currentDate);
+                    setEntries(dateFilteredEntries);
                 }
             } catch (error: any) {
                 setError(error.message);

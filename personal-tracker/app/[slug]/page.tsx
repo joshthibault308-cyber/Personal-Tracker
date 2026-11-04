@@ -1,9 +1,24 @@
 import Image from "next/image";
 import Entry from "../NewEntries";
+import EntryList from "../EntryList";
 import { jetBrains_Mono } from '@/app/layout'
-
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/server";
 export default async function Home({ params, }: { params: Promise<{ slug: string }> }) {
+
+  const supabase = await createClient();
+  const { data: { user }, error } = await supabase.auth.getUser()
+
+  if (error || !user) {
+    redirect('/login')
+  }
+
   const { slug } = await params
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + +slug - 1);
+  const currentDateFormatted = currentDate.toLocaleDateString('sv-SE');
+  const pageDate = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric" }).format(currentDate);
 
   return (
 
@@ -22,13 +37,13 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
             Create Entry
           </a>
           <div className="flex gap-[10%] items-center">
-            <a href={(+slug - 1 !== 1) ? `/${(+slug - 1)}` : `/`}>
+            <a href={`/${(+slug - 1)}`}>
               <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
             </a>
             <div className="flex text-[#000000]">
               {slug}/3
             </div>
-            <a href={(+slug + 1 !== 4) ? `/${(+slug + 1)}` : ``}>
+            <a href={`/${(+slug + 1)}`}>
               <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
             </a>
           </div>
@@ -48,7 +63,8 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
           <main className="flex flex-col min-h-0">
 
             <div className="flex flex-col text-center text-[5vw] text-[#000000]">
-              March {(() => {
+              {pageDate}
+              {/* March {(() => {
                 switch (+slug + 4) {
                   case (1): return "1st";
                   case (2): return "2nd";
@@ -59,7 +75,7 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
                   case (31): return "31st";
                   default: return (+slug + 4) +"th";
                 }
-              })()}
+              })()} */}
             </div>
 
             <div className="grid min-h-0 gap-5">
@@ -105,6 +121,9 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
 
               <div className="grid gap-5 overflow-y-auto min-h-0">
 
+                <Suspense>
+                  <EntryList user={user.email?.toString() ?? ""} date={(currentDateFormatted)} />
+                </Suspense>
 
               </div>
 

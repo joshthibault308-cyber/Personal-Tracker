@@ -72,7 +72,7 @@ interface EntryItem {
               Create Entry
             </a>
             <div className="flex gap-[10%] items-center">
-              <a href="/">
+              <a href="/0">
                 <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
               </a>
               <div className="flex text-[#000000]">
@@ -98,7 +98,7 @@ interface EntryItem {
             <main className="flex flex-col min-h-0">
 
               <div className="flex flex-col text-center text-[5vw] text-[#000000]">
-                March 5th
+                {new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric" }).format(new Date())}
               </div>
 
               <div className="grid min-h-0 gap-5">
@@ -144,7 +144,7 @@ interface EntryItem {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
                 <Suspense>
-                  <EntryList user={user.email?.toString() ?? ""} />
+                  <EntryList user={user.email?.toString() ?? ""} date={new Date().toLocaleDateString('sv-SE')} />
                   </Suspense>
 
                 </div>
