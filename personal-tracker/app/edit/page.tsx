@@ -1,21 +1,27 @@
-"use client"
-
 import Image from "next/image";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
 import Form from "next/form";
+import SearchParams from "./searchParams";
 import { supabaseComponent } from "@/app/utils/supabase";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 
-export default async function Edit() {
+interface EditProps {
+    searchParams: Promise<{[key: string]: string | string[] | undefined}>;
+}
+
+export default async function Edit({ searchParams }: EditProps) {
 
     const supabase = await createClient();
-    const searchParams = useSearchParams();
+
     const { data: { user }, error } = await supabase.auth.getUser()
 
     if (error || !user) {
         redirect('/login')
     }
+
+    const newSearchParams = await searchParams;
+    const id = newSearchParams.id;
 
     const editEntry = async (data: any) => {
         "use server";
@@ -31,10 +37,10 @@ export default async function Edit() {
         };
 
         const { data: newEntry, error } = await supabaseComponent
-            .from('entries')
-            .update(formData)
-            .eq("id", data.get('id'))
-            .select()
+        .from('entries')
+        .update(formData)
+        .eq("id", id)
+        .select()
 
         redirect("/");
 
