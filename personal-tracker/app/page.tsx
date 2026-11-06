@@ -3,8 +3,12 @@ import Entry from "./NewEntries";
 import EntryList from "./EntryList";
 import { jetBrains_Mono } from '@/app/layout'
 import { Suspense } from "react";
+import { supabaseComponent } from "@/app/utils/supabase";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
 
@@ -28,18 +32,23 @@ interface EntryItem {
   //const [entries, setEntries] = useState<EntryItem[]>([]);
 
   const pageNumber = 3;
-  //const [deleteisOpen, setDeleteisOpen] = useState(false);
-  //const [deleteID, setDeleteID] = useState("0");
+  // const [deleteisOpen, setDeleteisOpen] = useState(false);
+  // const [deleteID, setDeleteID] = useState("0");
 
   // const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
   //   setDeleteisOpen(true);
   //   setDeleteID(Button.currentTarget.id);
   // }
-  // const deleteButton = () => {
-  //   setEntries(entries.filter(entry => entry.keyNumber !== deleteID))
-  //   setDeleteID("null");
-  //   setDeleteisOpen(false);
-  // }
+
+  const deleteButton = async (deleteID: any) => {
+    "use server";
+
+    const { data: newEntry, error } = await supabaseComponent
+            .from('entries')
+            .delete()
+            .eq("id", deleteID);
+            revalidatePath(`/`, 'page');
+  }
 
   return (
 
@@ -144,7 +153,7 @@ interface EntryItem {
 
                 <div className="grid gap-5 overflow-y-auto min-h-0">
                 <Suspense>
-                  <EntryList user={user.email?.toString() ?? ""} date={new Date().toLocaleDateString('sv-SE')} />
+                  <EntryList user={user.email?.toString() ?? ""} date={new Date().toLocaleDateString('sv-SE')} deleteFunction={deleteButton} />
                   </Suspense>
 
                 </div>

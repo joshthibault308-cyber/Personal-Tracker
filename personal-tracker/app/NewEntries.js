@@ -1,9 +1,8 @@
 import Image from "next/image";
 import EntryBlock from "./EntryBlock";
 import { jetBrains_Mono, aBeeZee, zilla_Slab } from '@/app/layout'
-import { useState, useEffect } from "react";
 
-export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNumber, keyNumber }) {
+export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNumber, keyNumber, deleteFunction }) {
 
   if (Text1) {
     const date = new Date("2026-01-01T" + Text1 + "Z");
@@ -37,7 +36,7 @@ export default function Entry({ Text1, Text2, Text3, Text4, Text5, Text6, rowNum
           </a>
 
           <div className="flex justify-center w-1/2 aspect-square rounded-full bg-[#FF9B9B]">
-            <button id={keyNumber} className="flex justify-center" >
+            <button id={keyNumber} className="flex justify-center" onClick={() => deleteFunction(keyNumber)} >
               <Image
                 src="/Minus Symbol.png" alt="Minus" width={400} height={200} className="w-2/3"
               />

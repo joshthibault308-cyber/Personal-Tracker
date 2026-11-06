@@ -16,7 +16,7 @@ interface EntryItem {
     keyNumber: string | null;
 }
 
-export default function EntryList({user, date}: {user: string, date: string}) {
+export default function EntryList({user, date, deleteFunction}: {user: string, date: string, deleteFunction: any}) {
     const searchParams = useSearchParams();
 
     const [entries, setEntries] = useState<EntryItem[]>([]);
@@ -65,7 +65,7 @@ export default function EntryList({user, date}: {user: string, date: string}) {
     return (
         <>
         {entries.map((entry, index) => (
-            <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} rowNumber={index} keyNumber={entry.keyNumber} />
+            <Entry key={entry.keyNumber} Text1={entry.Text1} Text2={entry.Text2} Text3={entry.Text3} Text4={entry.Text4} Text5={entry.Text5} Text6={entry.Text6} rowNumber={index} keyNumber={entry.keyNumber} deleteFunction={deleteFunction} />
         ))}
     </>
     )
