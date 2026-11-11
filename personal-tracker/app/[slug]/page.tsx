@@ -4,7 +4,12 @@ import EntryList from "../EntryList";
 import { jetBrains_Mono } from '@/app/layout'
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { supabaseComponent } from "@/app/utils/supabase";
 import { createClient } from "@/app/utils/supabase/server";
+import { refresh, revalidatePath, updateTag } from 'next/cache';
+
+export const dynamic = 'force-dynamic';
+
 export default async function Home({ params, }: { params: Promise<{ slug: string }> }) {
 
   const supabase = await createClient();
@@ -19,6 +24,16 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
   currentDate.setDate(currentDate.getDate() + +slug - 1);
   const currentDateFormatted = currentDate.toLocaleDateString('sv-SE');
   const pageDate = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric" }).format(currentDate);
+
+  const deleteButton = async (deleteID: any) => {
+    "use server";
+
+    const { data: newEntry, error } = await supabaseComponent
+      .from('entries')
+      .delete()
+      .eq("id", deleteID);
+    revalidatePath(`${slug}`, 'page');
+  }
 
   return (
 
@@ -122,7 +137,7 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
               <div className="grid gap-5 overflow-y-auto min-h-0">
 
                 <Suspense>
-                  <EntryList user={user.email?.toString() ?? ""} date={(currentDateFormatted)} />
+                  <EntryList user={user.email?.toString() ?? ""} date={(currentDateFormatted)} deleteFunction={deleteButton} />
                 </Suspense>
 
               </div>
