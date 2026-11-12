@@ -44,19 +44,31 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
       />
 
       <div className="bg-[#FFEFD4]">
-        <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
-          <a
-            className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
-            href="/create"
-          >
-            Create Entry
-          </a>
+       <div className={`${jetBrains_Mono.className} flex h-[10vw] md:h-16 text-[2vw] items-center`}>
+            <div className="flex text-[3vw] md:text-[24px] text-[#000000]">
+              Dashboard
+            </div>
+          <div className={`${jetBrains_Mono.className} flex ml-[10%] mr-[2.5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium w-full`}>
+            <div className="flex gap-[5%]">
+            <a
+              className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
+              href="/about"
+            >
+              About
+            </a>
+            <a
+              className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
+              href="/create"
+            >
+              Create Entry
+            </a>
+            </div>
           <div className="flex gap-[10%] items-center">
             <a href={`/${(+slug - 1)}`}>
               <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
             </a>
             <div className="flex text-[#000000]">
-              {slug}/3
+              Days
             </div>
             <a href={`/${(+slug + 1)}`}>
               <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
@@ -68,6 +80,7 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
           >
             Logout
           </a>
+          </div>
         </div>
       </div>
 
@@ -79,18 +92,6 @@ export default async function Home({ params, }: { params: Promise<{ slug: string
 
             <div className="flex flex-col text-center text-[5vw] text-[#000000]">
               {pageDate}
-              {/* March {(() => {
-                switch (+slug + 4) {
-                  case (1): return "1st";
-                  case (2): return "2nd";
-                  case (3): return "3rd";
-                  case (21): return "21st";
-                  case (22): return "22nd";
-                  case (23): return "23rd";
-                  case (31): return "31st";
-                  default: return (+slug + 4) +"th";
-                }
-              })()} */}
             </div>
 
             <div className="grid min-h-0 gap-5">

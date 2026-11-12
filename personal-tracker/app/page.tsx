@@ -29,16 +29,7 @@ interface EntryItem {
     keyNumber: string | null;
   }
 
-  //const [entries, setEntries] = useState<EntryItem[]>([]);
-
   const pageNumber = 3;
-  // const [deleteisOpen, setDeleteisOpen] = useState(false);
-  // const [deleteID, setDeleteID] = useState("0");
-
-  // const handleDeleteButton = (Button: React.MouseEvent<HTMLButtonElement>) => {
-  //   setDeleteisOpen(true);
-  //   setDeleteID(Button.currentTarget.id);
-  // }
 
   const deleteButton = async (deleteID: any) => {
     "use server";
@@ -53,18 +44,6 @@ interface EntryItem {
   return (
 
     <div>
-      {/* {
-          (<div className="absolute grid items-center justify-center m-auto inset-0 w-[70vw] h-[60vw] sm:w-[40vw] sm:h-[35vw] lg:w-[25vw] lg:h-[21vw] rounded-[50] bg-[#fad79b] z-1">
-          <div className="flex text-center">Are you sure you want to delete this item?</div>
-          <div className="flex flex-1 gap-10 ml-2 mr-2">
-          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => deleteButton()}>
-            Yes
-          </button>
-          <button className="flex-1 rounded-[50] bg-[#fae5c0]" onClick={() => setDeleteisOpen(false)}>
-            No
-          </button>
-          </div>
-          </div>)} */}
 
       <div className="flex relative h-screen flex-col min-h-0">
 
@@ -73,19 +52,31 @@ interface EntryItem {
         />
 
         <div className="bg-[#FFEFD4]">
-          <div className={`${jetBrains_Mono.className} flex ml-[20%] mr-[5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
+          <div className={`${jetBrains_Mono.className} flex h-[10vw] md:h-16 text-[2vw] items-center`}>
+            <div className="flex text-[3vw] md:text-[24px] text-[#000000]">
+              Dashboard
+            </div>
+          <div className={`${jetBrains_Mono.className} flex ml-[10%] mr-[2.5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium w-full`}>
+            <div className="flex gap-[5%]">
+            <a
+              className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
+              href="/about"
+            >
+              About
+            </a>
             <a
               className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
               href="/create"
             >
               Create Entry
             </a>
+            </div>
             <div className="flex gap-[10%] items-center">
               <a href="/0">
                 <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="rotate-180 h-auto w-full" />
               </a>
               <div className="flex text-[#000000]">
-                1/{pageNumber}
+                Days
               </div>
               <a href="/2">
                 <Image src="/Arrow.png" alt="Arrow" width={32} height={32} className="h-auto w-full" />
@@ -97,6 +88,7 @@ interface EntryItem {
             >
               Logout
             </a>
+            </div>
           </div>
         </div>
 
