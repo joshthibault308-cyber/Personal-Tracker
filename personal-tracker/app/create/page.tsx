@@ -49,6 +49,14 @@ export default async function Create() {
                 <div className={`${jetBrains_Mono.className} flex items-center text-[3vw] md:text-[24px] ml-[1%] text-[#000000] font-medium`}>
                     Create Entry
                 </div>
+                <div className={`${jetBrains_Mono.className} flex ml-[10%] mr-[2.5%] h-[10vw] md:h-16 gap-[5%] text-[2vw] items-center justify-between font-medium`}>
+                <a
+                    className="flex whitespace-nowrap h-[7vw] md:h-11 items-center justify-center rounded-full bg-[#F8CF89] px-[5px] text-[#000000] transition-colors hover:bg-[#fad79b]"
+                    href="/"
+                >
+                    Back
+                </a>
+                </div>
             </div>
 
             <div className="grid flex-1 justify-center items-center gap-10 ml-[10%] mr-[10%] mt-[10%] mb-[10%]">
